@@ -1,5 +1,6 @@
 package AWT;
 
+
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -50,16 +51,40 @@ public boolean action(Event e, Object what){
 		alamat = calamat.getText();
 		tmp_lahir = ctmp_lahir.getText();
 		tgl_lahir = ctgl_lahir.getText();
+		new TampilanAWT(nim, nama, jk, alamat, tmp_lahir, tgl_lahir);
 		System.out.println(nim);
 		System.out.println(nama);
 		System.out.println(jk);
 		System.out.println(alamat);
 		System.out.println(tmp_lahir);
 		System.out.println(tgl_lahir);
+		return true;
 	}
-return true;
+return false;
 }
 
+public TampilanAWT(String nim,String nama,String jk,String alamat,String tmp_lahir,
+		String tgl_lahir){
+	super("Identitas Diri");
+	Panel p = new Panel();
+	add(p);
+	p.setLayout(new GridLayout(7, 2));
+	p.add( new Label("nim"));
+	p.add(new Label(nim));
+	p.add( new Label("nama"));
+	p.add(new Label(nama));
+	p.add( new Label("Jenis Kelamin"));
+	p.add(new Label(jk));
+	p.add( new Label("Tempat Lahir"));
+	p.add(new Label(tmp_lahir));
+	p.add( new Label("Tanggal Lahir"));
+	p.add(new Label(tgl_lahir));
+	p.add( new Label("Alamat"));
+	p.add(new Label(alamat));
+	setSize(250,300);
+	setVisible(true);
+	addWindowListener(this);
+}
 public static void main(String args[]){
 	new TampilanAWT();
 }
