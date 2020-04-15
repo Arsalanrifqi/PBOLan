@@ -17,19 +17,22 @@ public class LayoutSpring {
 	
 	private static void createAndShowGUI() {
         String[] labels = {"NIM : ", "Nama : ", "Jenis Kelamin : ", "Tempat Lahir: ",
-        		"Tanggal Lahir: ", "Alamat: "};
+        		"Tanggal Lahir: ", "Alamat: ",""};
         int numPairs = labels.length;
  
         //Create and populate the panel.
         JPanel p = new JPanel(new SpringLayout());
         for (int i = 0; i < numPairs; i++) {
-            JLabel l = new JLabel(labels[i], JLabel.TRAILING);
+        	JLabel l = new JLabel(labels[i], JLabel.TRAILING);
             p.add(l);
-            JTextField textField = new JTextField(10);
-            l.setLabelFor(textField);
-            p.add(textField);
+            if(labels[i]=="") {
+                p.add(b=new Button("save"));
+            }else {
+            	JTextField textField = new JTextField(10);
+                l.setLabelFor(textField);
+                p.add(textField);
+            }
         }
-        p.add(b=new Button("save"));
         //Lay out the panel.
         SpringUtilities.makeCompactGrid(p,
                                         numPairs, 2, //rows, cols
@@ -47,7 +50,7 @@ public class LayoutSpring {
         //Display the window.
         frame.pack();
         frame.setVisible(true);
-    }
+}
  
     public static void main(String[] args) {
         //Schedule a job for the event-dispatching thread:
