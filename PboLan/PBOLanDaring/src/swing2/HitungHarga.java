@@ -18,7 +18,9 @@ public class HitungHarga extends JFrame implements ActionListener,ChangeListener
 	JComboBox cb;
 	TextField cjumlah;
 	JButton b;
-	int jumlah;
+	int jumlah,harga,hargaawal;
+	double diskon,hargatot,hargadisk;
+	String tjumlah,radio;
 	final String[] jenis = {"PC","Laptop","Monitor"};
 	JMenuBar mb;
 	JMenu  m;
@@ -72,18 +74,45 @@ public class HitungHarga extends JFrame implements ActionListener,ChangeListener
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		if(arg0.getSource() == b){
-			String radio=null;
-			if(rb1.isSelected() == true){
-				radio = rb1.getText();
-			}else{
-				radio = rb2.getText();
-			}
 			jumlah = Integer.parseInt(cjumlah.getText());
-			
-			System.out.println("Radio Button Memilih: "+radio);
 			String combo = cb.getSelectedItem().toString();
-			System.out.println("ComboBox Memilih: "+combo);
+			if(rb1.isSelected() == true){
+				radio = "True";
+				diskon= 0.1;
+				
+			}else{
+				radio = "False";
+				diskon=0;
+			}
+			
+			if (combo=="PC") {
+				harga=2000000;
+			}
+			else if(combo=="Laptop") {
+				harga=5000000;
+			}
+			else if(combo=="Monitor") {
+				harga=900000;
+			}
+			Container cp = this.getContentPane();
+			cp.setLayout(new FlowLayout());
+			cp.setLayout(new GridLayout(7,2));
+			mb = new JMenuBar();
+			mb.add(m=new JMenu("exit"));
+			m.addChangeListener((ChangeListener) this);;
+			this.setJMenuBar(mb);
+			cp.add( new Label("Nama Barang : "));
+			cp.add( new Label(combo));
+			cp.add( new Label("Member : "));
+			cp.add( new Label(radio));
+			cp.add( new Label("Jumlah Barang : "));
+			cp.add( new Label(cjumlah.getText()));
+			cp.add( new Label("Harga Total Barang : "));
+			hargaawal=jumlah*harga;
+			hargadisk=(double) diskon*hargaawal;
+			hargatot=(double) hargaawal-hargadisk;
+			cp.add( new Label(Double.toString(hargatot)));
 		}
-	}
 
+}
 }
