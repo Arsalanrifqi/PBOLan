@@ -24,6 +24,7 @@ public class HitungHarga extends JFrame implements ActionListener,ChangeListener
 	final String[] jenis = {"PC","Laptop","Monitor"};
 	JMenuBar mb;
 	JMenu  m;
+	boolean c=true;
 	
 	public HitungHarga(){
 		super("Pilih Barang");
@@ -69,7 +70,7 @@ public class HitungHarga extends JFrame implements ActionListener,ChangeListener
 		}
 	}
 
-
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
@@ -84,7 +85,7 @@ public class HitungHarga extends JFrame implements ActionListener,ChangeListener
 				radio = "False";
 				diskon=0;
 			}
-			
+				
 			if (combo=="PC") {
 				harga=2000000;
 			}
@@ -94,25 +95,28 @@ public class HitungHarga extends JFrame implements ActionListener,ChangeListener
 			else if(combo=="Monitor") {
 				harga=900000;
 			}
-			Container cp = this.getContentPane();
-			cp.setLayout(new FlowLayout());
-			cp.setLayout(new GridLayout(7,2));
-			mb = new JMenuBar();
-			mb.add(m=new JMenu("exit"));
-			m.addChangeListener((ChangeListener) this);;
-			this.setJMenuBar(mb);
-			cp.add( new Label("Nama Barang : "));
-			cp.add( new Label(combo));
-			cp.add( new Label("Member : "));
-			cp.add( new Label(radio));
-			cp.add( new Label("Jumlah Barang : "));
-			cp.add( new Label(cjumlah.getText()));
-			cp.add( new Label("Harga Total Barang : "));
-			hargaawal=jumlah*harga;
-			hargadisk=(double) diskon*hargaawal;
-			hargatot=(double) hargaawal-hargadisk;
-			cp.add( new Label(Double.toString(hargatot)));
+			new HitungHarga(jumlah,combo,radio,diskon,harga);
 		}
-
-}
+	}
+	
+	public HitungHarga(int jumlah, String combo, String radio, double diskon, int harga) {
+		Container cp = this.getContentPane();
+		cp.setLayout(new FlowLayout());
+		cp.setLayout(new GridLayout(7,2));
+		mb = new JMenuBar();
+		mb.add(m=new JMenu("exit"));
+		m.addChangeListener((ChangeListener) this);;
+		this.setJMenuBar(mb);
+		cp.add( new Label("Nama Barang : "));
+		cp.add( new Label(combo));
+		cp.add( new Label("Member : "));
+		cp.add( new Label(radio));
+		cp.add( new Label("Jumlah Barang : "));
+		cp.add( new Label(cjumlah.getText()));
+		cp.add( new Label("Harga Total Barang : "));
+		hargaawal=jumlah*harga;
+		hargadisk=(double) diskon*hargaawal;
+		hargatot=(double) hargaawal-hargadisk;
+		cp.add( new Label(Double.toString(hargatot)));
+	}
 }
