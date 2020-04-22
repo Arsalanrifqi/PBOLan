@@ -16,7 +16,7 @@ public class HitungHarga extends JFrame implements ActionListener,ChangeListener
 	ButtonGroup bg;
 	JRadioButton rb1,rb2;
 	JComboBox cb;
-	TextField cjumlah;
+	JTextField cjumlah;
 	JButton b;
 	int jumlah,harga,hargaawal;
 	double diskon,hargatot,hargadisk;
@@ -36,18 +36,18 @@ public class HitungHarga extends JFrame implements ActionListener,ChangeListener
 		mb.add(m=new JMenu("exit"));
 		m.addChangeListener((ChangeListener) this);;
 		this.setJMenuBar(mb);
-		cp.add( new Label("Pilih Barang : "));
+		cp.add( new JLabel("Pilih Barang : "));
 		cp.add(cb =new JComboBox(jenis));
-		cp.add( new Label("Jenis Pembelian : "));
-		cp.add(new Label(""));
+		cp.add( new JLabel("Jenis Pembelian : "));
+		cp.add(new JLabel(""));
 		cp.add(rb1 = new JRadioButton("Member"));
 		cp.add(rb2 = new JRadioButton("Non-Member"));
 		bg = new ButtonGroup();
 		bg.add(rb1);
 		bg.add(rb2);
-		cp.add( new Label("Jumlah Pembelian :"));
-		cp.add(cjumlah = new TextField());
-		cp.add(new Label(""));
+		cp.add( new JLabel("Jumlah Pembelian :"));
+		cp.add(cjumlah = new JTextField());
+		cp.add(new JLabel(""));
 		cp.add(b = new JButton("Simpan"));
 		this.setVisible(true);
 		setSize(500,300);
@@ -75,6 +75,8 @@ public class HitungHarga extends JFrame implements ActionListener,ChangeListener
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		if(arg0.getSource() == b){
+			JFrame cp = new JFrame();
+			cp.setTitle("Data Pembelian");
 			jumlah = Integer.parseInt(cjumlah.getText());
 			String combo = cb.getSelectedItem().toString();
 			if(rb1.isSelected() == true){
@@ -95,28 +97,26 @@ public class HitungHarga extends JFrame implements ActionListener,ChangeListener
 			else if(combo=="Monitor") {
 				harga=900000;
 			}
-			new HitungHarga(jumlah,combo,radio,diskon,harga);
+			cp.setLayout(new FlowLayout());
+			cp.setLayout(new GridLayout(7,2));
+			mb = new JMenuBar();
+			mb.add(m=new JMenu("exit"));
+			m.addChangeListener((ChangeListener) this);;
+			this.setJMenuBar(mb);
+			cp.add( new JLabel("Nama Barang : "));
+			cp.add( new JLabel(combo));
+			cp.add( new JLabel("Member : "));
+			cp.add( new JLabel(radio));
+			cp.add( new JLabel("Jumlah Barang : "));
+			cp.add( new JLabel(cjumlah.getText()));
+			cp.add( new JLabel("Harga Total Barang : "));
+			hargaawal=jumlah*harga;
+			hargadisk=(double) diskon*hargaawal;
+			hargatot=(double) hargaawal-hargadisk;
+			cp.add( new JLabel(Double.toString(hargatot)));
+			cp.setSize(500,300);
+			cp.setVisible(true);
 		}
 	}
 	
-	public HitungHarga(int jumlah, String combo, String radio, double diskon, int harga) {
-		Container cp = this.getContentPane();
-		cp.setLayout(new FlowLayout());
-		cp.setLayout(new GridLayout(7,2));
-		mb = new JMenuBar();
-		mb.add(m=new JMenu("exit"));
-		m.addChangeListener((ChangeListener) this);;
-		this.setJMenuBar(mb);
-		cp.add( new Label("Nama Barang : "));
-		cp.add( new Label(combo));
-		cp.add( new Label("Member : "));
-		cp.add( new Label(radio));
-		cp.add( new Label("Jumlah Barang : "));
-		cp.add( new Label(cjumlah.getText()));
-		cp.add( new Label("Harga Total Barang : "));
-		hargaawal=jumlah*harga;
-		hargadisk=(double) diskon*hargaawal;
-		hargatot=(double) hargaawal-hargadisk;
-		cp.add( new Label(Double.toString(hargatot)));
-	}
 }
