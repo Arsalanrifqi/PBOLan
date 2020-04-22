@@ -3,6 +3,8 @@ package swing2;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Label;
+import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -14,7 +16,9 @@ public class HitungHarga extends JFrame implements ActionListener,ChangeListener
 	ButtonGroup bg;
 	JRadioButton rb1,rb2;
 	JComboBox cb;
+	TextField cjumlah;
 	JButton b;
+	int jumlah;
 	final String[] jenis = {"PC","Laptop","Monitor"};
 	JMenuBar mb;
 	JMenu  m;
@@ -23,21 +27,27 @@ public class HitungHarga extends JFrame implements ActionListener,ChangeListener
 		super("Pilih Barang");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container cp = this.getContentPane();
-		cp.setLayout(new FlowLayout(2));
+		cp.setLayout(new FlowLayout());
 		cp.setLayout(new GridLayout(7,2));
 		mb = new JMenuBar();
 		mb.add(m=new JMenu("exit"));
 		m.addChangeListener((ChangeListener) this);;
 		this.setJMenuBar(mb);
+		cp.add( new Label("Pilih Barang : "));
+		cp.add(cb =new JComboBox(jenis));
+		cp.add( new Label("Jenis Pembelian : "));
+		cp.add(new Label(""));
 		cp.add(rb1 = new JRadioButton("Member"));
 		cp.add(rb2 = new JRadioButton("Non-Member"));
 		bg = new ButtonGroup();
 		bg.add(rb1);
 		bg.add(rb2);
-		cp.add(cb =new JComboBox(jenis));
+		cp.add( new Label("Jumlah Pembelian :"));
+		cp.add(cjumlah = new TextField());
+		cp.add(new Label(""));
 		cp.add(b = new JButton("Simpan"));
 		this.setVisible(true);
-		setSize(250,300);
+		setSize(500,300);
 		setVisible(true);
 		b.addActionListener((ActionListener) this);
 	}
@@ -68,6 +78,8 @@ public class HitungHarga extends JFrame implements ActionListener,ChangeListener
 			}else{
 				radio = rb2.getText();
 			}
+			jumlah = Integer.parseInt(cjumlah.getText());
+			
 			System.out.println("Radio Button Memilih: "+radio);
 			String combo = cb.getSelectedItem().toString();
 			System.out.println("ComboBox Memilih: "+combo);
