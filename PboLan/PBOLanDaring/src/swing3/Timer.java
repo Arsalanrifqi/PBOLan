@@ -23,22 +23,24 @@ public class Timer extends JFrame implements ActionListener,ChangeListener{
 	JLabel angka;
 	int waktu;
 	String isi="Start";
-	Frame cp;
+	private Container frame; 
+	
+	
 	
 	public Timer(){
+		super("Timer");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Frame cp = new Frame();
-		cp.setTitle("Timer");
-		cp.setLayout(new FlowLayout());
-		cp.setLayout(new GridLayout(7,2));
+		Container frame = this.getContentPane();
+		frame.setLayout(new FlowLayout());
+		frame.setLayout(new GridLayout(7,2));
 		mb = new JMenuBar();
 		mb.add(m=new JMenu("exit"));
 		m.addChangeListener((ChangeListener) this);;
 		this.setJMenuBar(mb);
-		cp.add(cwaktu = new JTextField());
-		cp.add(b = new JButton("Simpan"));
+		frame.add(cwaktu = new JTextField());
+		frame.add(b = new JButton("Simpan"));
 		JLabel angka = new JLabel(isi);
-		cp.add(angka);
+		frame.add(angka);
 		this.setVisible(true);
 		setSize(500,300);
 		setVisible(true);
@@ -62,11 +64,15 @@ public class Timer extends JFrame implements ActionListener,ChangeListener{
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		if(arg0.getSource() == b){
+			JFrame frame = new JFrame();
+			frame.setTitle("timer");
 			waktu = Integer.parseInt(cwaktu.getText());
 			while(waktu>0) {
 				isi=Integer.toString(waktu);
-				JLabel angka = new JLabel(isi);
-				cp.delete(angka);
+				JLabel angka2 = new JLabel(isi);
+				frame.remove(angka);
+				frame.add(angka2);
+				waktu--;
 			}
 		}
 	}
