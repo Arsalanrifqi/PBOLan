@@ -23,9 +23,6 @@ public class Timer extends JFrame implements ActionListener,ChangeListener{
 	JLabel angka;
 	int waktu;
 	String isi="Start";
-	private Container frame; 
-	
-	
 	
 	public Timer(){
 		super("Timer");
@@ -66,14 +63,29 @@ public class Timer extends JFrame implements ActionListener,ChangeListener{
 		if(arg0.getSource() == b){
 			JFrame frame = new JFrame();
 			frame.setTitle("timer");
+			frame.setLayout(new FlowLayout());
+			frame.setLayout(new GridLayout(7,2));
 			waktu = Integer.parseInt(cwaktu.getText());
-			while(waktu>0) {
+			isi=Integer.toString(waktu);
+			JLabel angka = new JLabel(isi); 
+			 for(int i=waktu;i>=0;i--)
+	            {
+	                try {
+	                    Thread.sleep(1000);
+	                } catch (InterruptedException e) {
+	                    //TODO: handle exception
+	                    e.printStackTrace();
+	                }
+	                isi=Integer.toString(i);
+					frame.add(new JLabel(isi));
+	            }
+			/*while(waktu>0) {
 				isi=Integer.toString(waktu);
-				JLabel angka2 = new JLabel(isi);
-				frame.remove(angka);
-				frame.add(angka2);
+				frame.add(new JLabel(isi));
 				waktu--;
-			}
+			}*/
+			frame.setSize(500,300);
+			frame.setVisible(true);
 		}
 	}
 
