@@ -29,7 +29,7 @@ public class DBBiodata {
 	public Vector data(){
 		try	{
 			st =(Statement) con.createStatement();
-			rs =(ResultSet)	st.executeQuery("SELECT * FROM datadiri");
+			rs =(ResultSet)	st.executeQuery("SELECT * FROM mahasiswa");
 		} catch	(SQLException e) {
 			// TODO	Auto - generated catch block
 			e.printStackTrace();
@@ -45,7 +45,7 @@ public class DBBiodata {
 				rows.add(rs.getString(5));
 				rows.add(rs.getString(6));
 				dBdata.addElement(rows);
-				}
+			}
 		} catch	(SQLException e) {
 			//TODO Auto	- generated catch block
 			e.printStackTrace();
