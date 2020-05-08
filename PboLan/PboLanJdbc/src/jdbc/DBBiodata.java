@@ -26,6 +26,17 @@ public class DBBiodata {
 		}
 	}
 	
+	public void	insertBiodata(String nim, String nama, String jk, String tmp_lahir,	String tgl_lahir, String alamat){
+		try{
+			st	= (Statement) con.createStatement();
+			st.executeUpdate("INSERT INTO mahasiswa VALUES"+"("+"'"+nim+"',"
+			+"'"+nama+"',"+"'"+jk+"',"+"'"+tmp_lahir+"',"+"'"+tgl_lahir+"',"+"'"+alamat+"'"+")");
+		}catch(SQLException e){
+			// TODO Auto - generated catch block
+			e.printStackTrace();
+			}
+	}
+	
 	public Vector data(){
 		try	{
 			st =(Statement) con.createStatement();
